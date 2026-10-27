@@ -1,0 +1,277 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Eight Australian states and territories. Four rows of equal-size rectangles form a schematic tile-grid map. Numeric x/y scales are shared by all layers.",
+  "background": null,
+  "config": {
+    "font": "DM Sans",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#596F74",
+      "titleColor": "#405A60",
+      "domainColor": "#D9E4DE",
+      "tickColor": "#D9E4DE",
+      "gridColor": "#EDF1ED",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "legend": {
+      "labelColor": "#456065",
+      "titleColor": "#23414B",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "title": {
+      "color": "#18343D",
+      "fontSize": 15
+    },
+    "range": {
+      "category": [
+        "#197E78",
+        "#C17A4C",
+        "#486B98",
+        "#996B93",
+        "#6D965B",
+        "#B66568",
+        "#519AAD",
+        "#8D8260"
+      ]
+    }
+  },
+  "data": {
+    "url": "data/state_2025.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "tile_x": "number",
+        "tile_y": "number",
+        "family_consent_rate": "number"
+      }
+    }
+  },
+  "width": 500,
+  "height": 400,
+  "transform": [
+    {
+      "calculate": "datum.tile_x + 0.11",
+      "as": "tile_left"
+    },
+    {
+      "calculate": "datum.tile_x + 0.89",
+      "as": "tile_right"
+    },
+    {
+      "calculate": "datum.tile_y + 0.11",
+      "as": "tile_top"
+    },
+    {
+      "calculate": "datum.tile_y + 0.89",
+      "as": "tile_bottom"
+    },
+    {
+      "calculate": "datum.tile_x + 0.50",
+      "as": "tile_center_x"
+    },
+    {
+      "calculate": "datum.tile_y + 0.50",
+      "as": "tile_center_y"
+    },
+    {
+      "calculate": "format(datum.family_consent_rate, '.0f') + '%'",
+      "as": "tile_rate_label"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "tile_center_x",
+      "type": "quantitative",
+      "scale": {
+        "domain": [
+          0,
+          5
+        ],
+        "nice": false,
+        "zero": false
+      },
+      "axis": null
+    },
+    "y": {
+      "field": "tile_center_y",
+      "type": "quantitative",
+      "scale": {
+        "domain": [
+          0,
+          4
+        ],
+        "nice": false,
+        "reverse": true,
+        "zero": false
+      },
+      "axis": null
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "stroke": "#FFFFFF",
+        "strokeWidth": 3,
+        "cornerRadius": 6
+      },
+      "encoding": {
+        "x": {
+          "field": "tile_left",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              5
+            ],
+            "nice": false
+          },
+          "axis": null
+        },
+        "x2": {
+          "field": "tile_right"
+        },
+        "y": {
+          "field": "tile_top",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              4
+            ],
+            "nice": false,
+            "reverse": true
+          },
+          "axis": null
+        },
+        "y2": {
+          "field": "tile_bottom"
+        },
+        "color": {
+          "field": "family_consent_rate",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              40,
+              80
+            ],
+            "range": [
+              "#E4F3EA",
+              "#C6E3D9",
+              "#92CBC3",
+              "#5AA5A9",
+              "#307E91",
+              "#234F6F"
+            ]
+          },
+          "legend": {
+            "title": "Family consent rate (%)",
+            "orient": "bottom",
+            "direction": "horizontal",
+            "gradientLength": 230,
+            "gradientThickness": 11,
+            "labelFontSize": 12,
+            "titleFontSize": 12
+          }
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State / territory"
+          },
+          {
+            "field": "family_consent_rate",
+            "type": "quantitative",
+            "title": "Consent rate (%)",
+            "format": ".0f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "font": "DM Sans",
+        "fontSize": 15,
+        "fontWeight": 800,
+        "dy": -12,
+        "baseline": "middle"
+      },
+      "encoding": {
+        "text": {
+          "field": "code",
+          "type": "nominal"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.family_consent_rate >= 68",
+            "value": "#FFFFFF"
+          },
+          "value": "#173844"
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State / territory"
+          },
+          {
+            "field": "family_consent_rate",
+            "type": "quantitative",
+            "title": "Consent rate (%)",
+            "format": ".0f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "font": "DM Sans",
+        "fontSize": 14,
+        "fontWeight": 700,
+        "dy": 14,
+        "baseline": "middle"
+      },
+      "encoding": {
+        "text": {
+          "field": "tile_rate_label",
+          "type": "nominal"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.family_consent_rate >= 68",
+            "value": "#FFFFFF"
+          },
+          "value": "#173844"
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State / territory"
+          },
+          {
+            "field": "family_consent_rate",
+            "type": "quantitative",
+            "title": "Consent rate (%)",
+            "format": ".0f"
+          }
+        ]
+      }
+    }
+  ],
+  "usermeta": {
+    "chart_number": 6,
+    "proposed_advanced_idiom": true,
+    "source": "DonateLife, family consent rate by state, 2025",
+    "note": "Map 3 of 3: schematic tile grid, not to scale; tutor should confirm map idiom classification; tile coordinates are illustrative.",
+    "fix": "V9: use explicit numeric xy positions and shared scales, fixed 500x400 tile grid, parse numeric CSV values, equal-size square tiles",
+    "colour_semantics": "Shared sequential teal-to-navy ramp for quantitative values; legends retain separate units and domains."
+  }
+}

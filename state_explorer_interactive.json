@@ -1,0 +1,264 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Interactive state exploration using a Vega-Lite dropdown param shared by 2020-2025 trend and 2025 comparison views.",
+  "background": null,
+  "config": {
+    "font": "DM Sans",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#596F74",
+      "titleColor": "#405A60",
+      "domainColor": "#D9E4DE",
+      "tickColor": "#D9E4DE",
+      "gridColor": "#EDF1ED",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "legend": {
+      "labelColor": "#456065",
+      "titleColor": "#23414B",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "title": {
+      "color": "#18343D",
+      "fontSize": 15
+    },
+    "range": {
+      "category": [
+        "#197E78",
+        "#C17A4C",
+        "#486B98",
+        "#996B93",
+        "#6D965B",
+        "#B66568",
+        "#519AAD",
+        "#8D8260"
+      ]
+    }
+  },
+  "data": {
+    "url": "data/new_registrations_2020_2025.csv"
+  },
+  "params": [
+    {
+      "name": "chosenState",
+      "value": "NSW",
+      "bind": {
+        "input": "select",
+        "name": "Choose a state / territory: ",
+        "options": [
+          "NSW",
+          "VIC",
+          "QLD",
+          "SA",
+          "WA",
+          "TAS",
+          "NT",
+          "ACT"
+        ],
+        "labels": [
+          "New South Wales",
+          "Victoria",
+          "Queensland",
+          "South Australia",
+          "Western Australia",
+          "Tasmania",
+          "Northern Territory",
+          "Australian Capital Territory"
+        ]
+      }
+    }
+  ],
+  "spacing": 30,
+  "vconcat": [
+    {
+      "width": "container",
+      "height": 210,
+      "title": {
+        "text": "Annual registrations in your selected state",
+        "anchor": "start",
+        "fontSize": 15,
+        "fontWeight": "bold"
+      },
+      "transform": [
+        {
+          "filter": "datum.code === chosenState"
+        }
+      ],
+      "mark": {
+        "type": "line",
+        "strokeWidth": 3.5,
+        "point": {
+          "filled": true,
+          "size": 110,
+          "stroke": "white",
+          "strokeWidth": 1.5
+        }
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "sort": "ascending",
+          "axis": {
+            "title": "Year",
+            "labelAngle": 0
+          }
+        },
+        "y": {
+          "field": "new_registrations",
+          "type": "quantitative",
+          "scale": {
+            "zero": true
+          },
+          "axis": {
+            "title": "New registrations",
+            "format": ",.0f"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State / territory"
+          },
+          {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "field": "new_registrations",
+            "type": "quantitative",
+            "format": ",.0f",
+            "title": "New registrations"
+          }
+        ],
+        "color": {
+          "field": "code",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "NSW",
+              "VIC",
+              "QLD",
+              "SA",
+              "WA",
+              "TAS",
+              "NT",
+              "ACT"
+            ],
+            "range": [
+              "#197E78",
+              "#C17A4C",
+              "#486B98",
+              "#996B93",
+              "#6D965B",
+              "#B66568",
+              "#519AAD",
+              "#8D8260"
+            ]
+          },
+          "legend": null
+        }
+      }
+    },
+    {
+      "width": "container",
+      "height": 215,
+      "title": {
+        "text": "2025: compare with other states",
+        "anchor": "start",
+        "fontSize": 15,
+        "fontWeight": "bold"
+      },
+      "transform": [
+        {
+          "filter": "datum.year == 2025"
+        }
+      ],
+      "mark": {
+        "type": "bar",
+        "cornerRadiusEnd": 4,
+        "stroke": "#3D5460",
+        "strokeWidth": 0.25
+      },
+      "encoding": {
+        "x": {
+          "field": "new_registrations",
+          "type": "quantitative",
+          "scale": {
+            "zero": true
+          },
+          "axis": {
+            "title": "New registrations in 2025",
+            "format": ",.0f"
+          }
+        },
+        "y": {
+          "field": "code",
+          "type": "nominal",
+          "sort": "-x",
+          "axis": {
+            "title": null
+          }
+        },
+        "color": {
+          "field": "code",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "NSW",
+              "VIC",
+              "QLD",
+              "SA",
+              "WA",
+              "TAS",
+              "NT",
+              "ACT"
+            ],
+            "range": [
+              "#197E78",
+              "#C17A4C",
+              "#486B98",
+              "#996B93",
+              "#6D965B",
+              "#B66568",
+              "#519AAD",
+              "#8D8260"
+            ]
+          },
+          "legend": null
+        },
+        "opacity": {
+          "condition": {
+            "test": "datum.code === chosenState",
+            "value": 1
+          },
+          "value": 0.25
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State / territory"
+          },
+          {
+            "field": "new_registrations",
+            "type": "quantitative",
+            "format": ",.0f",
+            "title": "New registrations (2025)"
+          }
+        ]
+      }
+    }
+  ],
+  "usermeta": {
+    "source": "DonateLife / Organ and Tissue Authority: new registrations by state and territory, 2020–2025",
+    "interaction": "Dropdown changes 2020–2025 trend and highlights chosen state in 2025 comparisons.",
+    "rubric_note": "Extra interactive explorer beyond the 13 numbered charts; single coordinated view, not counted as multiple charts."
+  }
+}

@@ -1,0 +1,159 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": null,
+  "config": {
+    "font": "DM Sans",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#596F74",
+      "titleColor": "#405A60",
+      "domainColor": "#D9E4DE",
+      "tickColor": "#D9E4DE",
+      "gridColor": "#EDF1ED",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "legend": {
+      "labelColor": "#456065",
+      "titleColor": "#23414B",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "title": {
+      "color": "#18343D",
+      "fontSize": 15
+    },
+    "range": {
+      "category": [
+        "#197E78",
+        "#C17A4C",
+        "#486B98",
+        "#996B93",
+        "#6D965B",
+        "#B66568",
+        "#519AAD",
+        "#8D8260"
+      ]
+    }
+  },
+  "data": {
+    "url": "data/new_registrations_2020_2025.csv"
+  },
+  "width": "container",
+  "height": 300,
+  "transform": [
+    {
+      "aggregate": [
+        {
+          "op": "sum",
+          "field": "new_registrations",
+          "as": "total"
+        }
+      ],
+      "groupby": [
+        "year"
+      ]
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "area",
+        "opacity": 0.12,
+        "color": "#147D78"
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "axis": {
+            "title": "Year",
+            "labelAngle": 0
+          }
+        },
+        "y": {
+          "field": "total",
+          "type": "quantitative",
+          "axis": {
+            "title": "New registrations"
+          }
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "line",
+        "point": {
+          "filled": true,
+          "size": 85
+        },
+        "strokeWidth": 3,
+        "color": "#147D78"
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "axis": {
+            "title": "Year",
+            "labelAngle": 0
+          }
+        },
+        "y": {
+          "field": "total",
+          "type": "quantitative",
+          "axis": {
+            "title": "New registrations"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "year",
+            "title": "Year"
+          },
+          {
+            "field": "total",
+            "type": "quantitative",
+            "title": "New registrations",
+            "format": ","
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.year == 2021"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "dy": -19,
+        "fontWeight": "bold",
+        "color": "#18343D",
+        "fontSize": 12
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "total",
+          "type": "quantitative"
+        },
+        "text": {
+          "value": "2021 peak"
+        }
+      }
+    }
+  ],
+  "usermeta": {
+    "chart_number": 1,
+    "proposed_advanced_idiom": false,
+    "source": "DonateLife, New registrations by state/territory 2020–2025",
+    "note": "See README for original data and derived calculations"
+  }
+}

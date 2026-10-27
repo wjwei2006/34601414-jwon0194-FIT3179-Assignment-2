@@ -1,0 +1,134 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": null,
+  "config": {
+    "font": "DM Sans",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#596F74",
+      "titleColor": "#405A60",
+      "domainColor": "#D9E4DE",
+      "tickColor": "#D9E4DE",
+      "gridColor": "#EDF1ED",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "legend": {
+      "labelColor": "#456065",
+      "titleColor": "#23414B",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "title": {
+      "color": "#18343D",
+      "fontSize": 15
+    },
+    "range": {
+      "category": [
+        "#197E78",
+        "#C17A4C",
+        "#486B98",
+        "#996B93",
+        "#6D965B",
+        "#B66568",
+        "#519AAD",
+        "#8D8260"
+      ]
+    }
+  },
+  "data": {
+    "url": "data/age_share_within_state_aug_2026.csv"
+  },
+  "width": "container",
+  "height": 295,
+  "mark": {
+    "type": "rect",
+    "cornerRadius": 2,
+    "stroke": "white",
+    "strokeWidth": 2
+  },
+  "encoding": {
+    "x": {
+      "field": "age",
+      "type": "ordinal",
+      "sort": [
+        "16–17",
+        "18–24",
+        "25–34",
+        "35–44",
+        "45–54",
+        "55–64",
+        "65+"
+      ],
+      "axis": {
+        "title": "Age group",
+        "labelAngle": 0
+      }
+    },
+    "y": {
+      "field": "code",
+      "type": "nominal",
+      "sort": [
+        "NSW",
+        "VIC",
+        "QLD",
+        "SA",
+        "WA",
+        "TAS",
+        "NT",
+        "ACT"
+      ],
+      "axis": {
+        "title": null
+      }
+    },
+    "color": {
+      "field": "share_pct",
+      "type": "quantitative",
+      "scale": {
+        "range": [
+          "#E4F3EA",
+          "#C6E3D9",
+          "#92CBC3",
+          "#5AA5A9",
+          "#307E91",
+          "#234F6F"
+        ]
+      },
+      "legend": {
+        "title": "Share within state (%)"
+      }
+    },
+    "tooltip": [
+      {
+        "field": "state",
+        "type": "nominal",
+        "title": "State / territory"
+      },
+      {
+        "field": "age",
+        "title": "Age"
+      },
+      {
+        "field": "share_pct",
+        "title": "State share",
+        "format": ".1f"
+      },
+      {
+        "field": "count",
+        "type": "quantitative",
+        "title": "Records",
+        "format": ","
+      }
+    ]
+  },
+  "usermeta": {
+    "chart_number": 10,
+    "proposed_advanced_idiom": true,
+    "source": "Services Australia, legally valid consent registrations by state/age, 31 Aug 2026",
+    "note": "See README for original data and derived calculations",
+    "colour_semantics": "Shared sequential teal-to-navy ramp for quantitative values; legends retain separate units and domains."
+  }
+}

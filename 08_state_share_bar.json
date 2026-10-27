@@ -1,0 +1,190 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "State contributions to the 2025 national new-registration total. Ranked horizontal bars share a zero baseline, and fixed state colours match the bump chart and interactive explorer.",
+  "background": null,
+  "config": {
+    "font": "DM Sans",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#596F74",
+      "titleColor": "#405A60",
+      "domainColor": "#D9E4DE",
+      "tickColor": "#D9E4DE",
+      "gridColor": "#EDF1ED",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "legend": {
+      "labelColor": "#456065",
+      "titleColor": "#23414B",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "title": {
+      "color": "#18343D",
+      "fontSize": 15
+    },
+    "range": {
+      "category": [
+        "#197E78",
+        "#C17A4C",
+        "#486B98",
+        "#996B93",
+        "#6D965B",
+        "#B66568",
+        "#519AAD",
+        "#8D8260"
+      ]
+    }
+  },
+  "data": {
+    "url": "data/state_registration_share_2025.csv"
+  },
+  "width": "container",
+  "height": 292,
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "cornerRadiusEnd": 3,
+        "size": 22
+      },
+      "encoding": {
+        "x": {
+          "field": "new_registrations",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              43000
+            ],
+            "nice": false,
+            "zero": true
+          },
+          "axis": {
+            "title": "New registrations in 2025",
+            "format": ",.0f",
+            "tickCount": 5
+          }
+        },
+        "y": {
+          "field": "code",
+          "type": "nominal",
+          "sort": [
+            "NSW",
+            "QLD",
+            "VIC",
+            "SA",
+            "WA",
+            "ACT",
+            "TAS",
+            "NT"
+          ],
+          "axis": {
+            "title": null,
+            "labelFontSize": 12,
+            "labelFontWeight": "bold"
+          }
+        },
+        "color": {
+          "field": "code",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "NSW",
+              "VIC",
+              "QLD",
+              "SA",
+              "WA",
+              "TAS",
+              "NT",
+              "ACT"
+            ],
+            "range": [
+              "#197E78",
+              "#C17A4C",
+              "#486B98",
+              "#996B93",
+              "#6D965B",
+              "#B66568",
+              "#519AAD",
+              "#8D8260"
+            ]
+          },
+          "legend": null
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State / territory"
+          },
+          {
+            "field": "new_registrations",
+            "type": "quantitative",
+            "title": "New registrations (2025)",
+            "format": ","
+          },
+          {
+            "field": "share_pct",
+            "type": "quantitative",
+            "title": "Share of national registrations (%)",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 7,
+        "fontSize": 11,
+        "fontWeight": "bold",
+        "color": "#314B54"
+      },
+      "encoding": {
+        "x": {
+          "field": "new_registrations",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              43000
+            ],
+            "nice": false,
+            "zero": true
+          }
+        },
+        "y": {
+          "field": "code",
+          "type": "nominal",
+          "sort": [
+            "NSW",
+            "QLD",
+            "VIC",
+            "SA",
+            "WA",
+            "ACT",
+            "TAS",
+            "NT"
+          ]
+        },
+        "text": {
+          "field": "new_registrations",
+          "type": "quantitative",
+          "format": ",.0f"
+        }
+      }
+    }
+  ],
+  "usermeta": {
+    "chart_number": 8,
+    "proposed_advanced_idiom": false,
+    "source": "DonateLife, new registrations by state/territory, 2025",
+    "note": "Flat state categories: use aligned length/position for precise magnitude comparison. Shares remain available in tooltip. This chart is a basic idiom, not an advanced treemap."
+  }
+}

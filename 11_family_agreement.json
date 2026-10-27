@@ -1,0 +1,146 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": null,
+  "config": {
+    "font": "DM Sans",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#596F74",
+      "titleColor": "#405A60",
+      "domainColor": "#D9E4DE",
+      "tickColor": "#D9E4DE",
+      "gridColor": "#EDF1ED",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "legend": {
+      "labelColor": "#456065",
+      "titleColor": "#23414B",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "title": {
+      "color": "#18343D",
+      "fontSize": 15
+    },
+    "range": {
+      "category": [
+        "#197E78",
+        "#C17A4C",
+        "#486B98",
+        "#996B93",
+        "#6D965B",
+        "#B66568",
+        "#519AAD",
+        "#8D8260"
+      ]
+    }
+  },
+  "data": {
+    "url": "data/family_agreement_context_2025.csv"
+  },
+  "width": "container",
+  "height": 190,
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "cornerRadiusEnd": 5,
+        "height": 16,
+        "color": "#E7EFEB"
+      },
+      "encoding": {
+        "x": {
+          "datum": 100,
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              100
+            ]
+          },
+          "axis": {
+            "title": "Families agreeing (%)"
+          }
+        },
+        "y": {
+          "field": "group",
+          "type": "nominal",
+          "sort": [
+            "Registered on AODR",
+            "Family knew wishes",
+            "Neither registered nor wishes known"
+          ],
+          "axis": {
+            "title": null
+          }
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "bar",
+        "cornerRadiusEnd": 5,
+        "height": 16,
+        "color": "#147D78"
+      },
+      "encoding": {
+        "x": {
+          "field": "rate",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "group",
+          "type": "nominal",
+          "sort": [
+            "Registered on AODR",
+            "Family knew wishes",
+            "Neither registered nor wishes known"
+          ]
+        },
+        "tooltip": [
+          {
+            "field": "group",
+            "title": "Context"
+          },
+          {
+            "field": "rate",
+            "title": "Consent (%)"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "dx": 8,
+        "fontWeight": "bold",
+        "align": "left",
+        "fontSize": 12
+      },
+      "encoding": {
+        "x": {
+          "field": "rate",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "group",
+          "type": "nominal"
+        },
+        "text": {
+          "field": "rate",
+          "type": "quantitative",
+          "format": ".0f"
+        }
+      }
+    }
+  ],
+  "usermeta": {
+    "chart_number": 11,
+    "proposed_advanced_idiom": false,
+    "source": "DonateLife, family consent in different circumstances, 2025",
+    "note": "See README for original data and derived calculations"
+  }
+}

@@ -1,0 +1,153 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": null,
+  "config": {
+    "font": "DM Sans",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#596F74",
+      "titleColor": "#405A60",
+      "domainColor": "#D9E4DE",
+      "tickColor": "#D9E4DE",
+      "gridColor": "#EDF1ED",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "legend": {
+      "labelColor": "#456065",
+      "titleColor": "#23414B",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "title": {
+      "color": "#18343D",
+      "fontSize": 15
+    },
+    "range": {
+      "category": [
+        "#197E78",
+        "#C17A4C",
+        "#486B98",
+        "#996B93",
+        "#6D965B",
+        "#B66568",
+        "#519AAD",
+        "#8D8260"
+      ]
+    }
+  },
+  "data": {
+    "url": "data/state_rankings.csv"
+  },
+  "width": "container",
+  "height": 300,
+  "params": [
+    {
+      "name": "highlight",
+      "select": {
+        "type": "point",
+        "fields": [
+          "code"
+        ]
+      },
+      "bind": "legend"
+    }
+  ],
+  "mark": {
+    "type": "line",
+    "point": {
+      "filled": true,
+      "size": 65
+    },
+    "strokeWidth": 2.5
+  },
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "ordinal",
+      "axis": {
+        "title": "Year",
+        "labelAngle": 0
+      }
+    },
+    "y": {
+      "field": "rank",
+      "type": "quantitative",
+      "scale": {
+        "domain": [
+          8.3,
+          0.7
+        ]
+      },
+      "axis": {
+        "title": "Rank (1 = most new registrations)",
+        "tickMinStep": 1
+      }
+    },
+    "color": {
+      "field": "code",
+      "type": "nominal",
+      "legend": {
+        "title": "State"
+      },
+      "scale": {
+        "domain": [
+          "NSW",
+          "VIC",
+          "QLD",
+          "SA",
+          "WA",
+          "TAS",
+          "NT",
+          "ACT"
+        ],
+        "range": [
+          "#197E78",
+          "#C17A4C",
+          "#486B98",
+          "#996B93",
+          "#6D965B",
+          "#B66568",
+          "#519AAD",
+          "#8D8260"
+        ]
+      }
+    },
+    "opacity": {
+      "condition": {
+        "param": "highlight",
+        "value": 1
+      },
+      "value": 0.17
+    },
+    "tooltip": [
+      {
+        "field": "state",
+        "type": "nominal",
+        "title": "State / territory"
+      },
+      {
+        "field": "year",
+        "title": "Year"
+      },
+      {
+        "field": "new_registrations",
+        "type": "quantitative",
+        "title": "New registrations",
+        "format": ","
+      },
+      {
+        "field": "rank",
+        "title": "State rank"
+      }
+    ]
+  },
+  "usermeta": {
+    "chart_number": 3,
+    "proposed_advanced_idiom": true,
+    "source": "DonateLife, New registrations by state/territory 2020–2025",
+    "note": "See README for original data and derived calculations"
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": null,
+  "config": {
+    "font": "DM Sans",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#596F74",
+      "titleColor": "#405A60",
+      "domainColor": "#D9E4DE",
+      "tickColor": "#D9E4DE",
+      "gridColor": "#EDF1ED",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "legend": {
+      "labelColor": "#456065",
+      "titleColor": "#23414B",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "title": {
+      "color": "#18343D",
+      "fontSize": 15
+    },
+    "range": {
+      "category": [
+        "#197E78",
+        "#C17A4C",
+        "#486B98",
+        "#996B93",
+        "#6D965B",
+        "#B66568",
+        "#519AAD",
+        "#8D8260"
+      ]
+    }
+  },
+  "width": "container",
+  "height": 430,
+  "projection": {
+    "type": "mercator"
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/rowanhogan/australian-states/master/states.min.geojson",
+        "format": {
+          "type": "json",
+          "property": "features"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#E4EEEE",
+        "stroke": "#ffffff",
+        "strokeWidth": 1
+      }
+    },
+    {
+      "data": {
+        "url": "data/state_2025.csv"
+      },
+      "mark": {
+        "type": "circle",
+        "fill": "#C98A58",
+        "stroke": "#395761",
+        "strokeWidth": 1,
+        "opacity": 0.85
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "size": {
+          "field": "deceased_donors",
+          "type": "quantitative",
+          "scale": {
+            "range": [
+              70,
+              1800
+            ]
+          },
+          "legend": {
+            "title": "Deceased donors"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State / territory"
+          },
+          {
+            "field": "deceased_donors",
+            "type": "quantitative",
+            "title": "Donors 2025",
+            "format": ","
+          },
+          {
+            "field": "transplant_recipients",
+            "type": "quantitative",
+            "title": "Recipients 2025",
+            "format": ","
+          }
+        ]
+      }
+    }
+  ],
+  "usermeta": {
+    "chart_number": 5,
+    "proposed_advanced_idiom": true,
+    "source": "DonateLife, Deceased organ donors by state, 2025; Australian state GeoJSON",
+    "note": "Map 2 of 3: proportional symbols",
+    "boundary_source": "rowanhogan/australian-states (third-party) — origin/licence unresolved; approval/replacement required before claiming cleared rights"
+  }
+}

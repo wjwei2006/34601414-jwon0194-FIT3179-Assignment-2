@@ -1,0 +1,92 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": null,
+  "config": {
+    "font": "DM Sans",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#596F74",
+      "titleColor": "#405A60",
+      "domainColor": "#D9E4DE",
+      "tickColor": "#D9E4DE",
+      "gridColor": "#EDF1ED",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "legend": {
+      "labelColor": "#456065",
+      "titleColor": "#23414B",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "title": {
+      "color": "#18343D",
+      "fontSize": 15
+    },
+    "range": {
+      "category": [
+        "#197E78",
+        "#C17A4C",
+        "#486B98",
+        "#996B93",
+        "#6D965B",
+        "#B66568",
+        "#519AAD",
+        "#8D8260"
+      ]
+    }
+  },
+  "data": {
+    "url": "data/registration_waffle_2025.csv"
+  },
+  "width": "container",
+  "height": 340,
+  "mark": {
+    "type": "rect",
+    "cornerRadius": 3,
+    "stroke": "#ffffff",
+    "strokeWidth": 3
+  },
+  "encoding": {
+    "x": {
+      "field": "col",
+      "type": "ordinal",
+      "axis": null
+    },
+    "y": {
+      "field": "row",
+      "type": "ordinal",
+      "sort": "ascending",
+      "axis": null
+    },
+    "color": {
+      "field": "registered",
+      "type": "nominal",
+      "scale": {
+        "domain": [
+          "Registered",
+          "Not registered"
+        ],
+        "range": [
+          "#147D78",
+          "#E5EAE6"
+        ]
+      },
+      "legend": null
+    },
+    "tooltip": [
+      {
+        "field": "registered",
+        "title": "Registered (illustrated)"
+      }
+    ]
+  },
+  "usermeta": {
+    "chart_number": 13,
+    "proposed_advanced_idiom": true,
+    "source": "DonateLife, proportion of Australians 16+ registered on AODR, 2025",
+    "note": "See README for original data and derived calculations"
+  }
+}

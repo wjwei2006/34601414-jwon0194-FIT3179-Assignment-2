@@ -1,0 +1,133 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": null,
+  "config": {
+    "font": "DM Sans",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#596F74",
+      "titleColor": "#405A60",
+      "domainColor": "#D9E4DE",
+      "tickColor": "#D9E4DE",
+      "gridColor": "#EDF1ED",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "legend": {
+      "labelColor": "#456065",
+      "titleColor": "#23414B",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "title": {
+      "color": "#18343D",
+      "fontSize": 15
+    },
+    "range": {
+      "category": [
+        "#197E78",
+        "#C17A4C",
+        "#486B98",
+        "#996B93",
+        "#6D965B",
+        "#B66568",
+        "#519AAD",
+        "#8D8260"
+      ]
+    }
+  },
+  "data": {
+    "url": "data/aodr_age_gender_aug_2026.csv"
+  },
+  "width": "container",
+  "height": 330,
+  "transform": [
+    {
+      "aggregate": [
+        {
+          "op": "sum",
+          "field": "registered_records",
+          "as": "records"
+        }
+      ],
+      "groupby": [
+        "age",
+        "gender"
+      ]
+    },
+    {
+      "calculate": "datum.gender == 'Female' ? -datum.records : datum.records",
+      "as": "signed"
+    }
+  ],
+  "mark": {
+    "type": "bar",
+    "cornerRadiusEnd": 2
+  },
+  "encoding": {
+    "x": {
+      "field": "signed",
+      "type": "quantitative",
+      "axis": {
+        "title": "Registered decision records (count)",
+        "labelExpr": "abs(datum.value)/1000 + \"k\""
+      }
+    },
+    "y": {
+      "field": "age",
+      "type": "ordinal",
+      "sort": [
+        "16–17",
+        "18–24",
+        "25–34",
+        "35–44",
+        "45–54",
+        "55–64",
+        "65+"
+      ],
+      "axis": {
+        "title": "Age group"
+      }
+    },
+    "color": {
+      "field": "gender",
+      "scale": {
+        "domain": [
+          "Female",
+          "Male"
+        ],
+        "range": [
+          "#147D78",
+          "#CB855A"
+        ]
+      },
+      "legend": {
+        "title": null
+      }
+    },
+    "tooltip": [
+      {
+        "field": "age",
+        "title": "Age"
+      },
+      {
+        "field": "gender",
+        "title": "Sex"
+      },
+      {
+        "field": "records",
+        "type": "quantitative",
+        "title": "Published records",
+        "format": ","
+      }
+    ]
+  },
+  "usermeta": {
+    "chart_number": 9,
+    "proposed_advanced_idiom": true,
+    "source": "Services Australia, legally valid consent registrations by age/sex, 31 Aug 2026",
+    "note": "See README for original data and derived calculations"
+  }
+}

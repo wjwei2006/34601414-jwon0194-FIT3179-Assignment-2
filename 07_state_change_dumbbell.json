@@ -1,0 +1,149 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": null,
+  "config": {
+    "font": "DM Sans",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#596F74",
+      "titleColor": "#405A60",
+      "domainColor": "#D9E4DE",
+      "tickColor": "#D9E4DE",
+      "gridColor": "#EDF1ED",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "legend": {
+      "labelColor": "#456065",
+      "titleColor": "#23414B",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "title": {
+      "color": "#18343D",
+      "fontSize": 15
+    },
+    "range": {
+      "category": [
+        "#197E78",
+        "#C17A4C",
+        "#486B98",
+        "#996B93",
+        "#6D965B",
+        "#B66568",
+        "#519AAD",
+        "#8D8260"
+      ]
+    }
+  },
+  "data": {
+    "url": "data/state_changes_2024_2025.csv"
+  },
+  "width": "container",
+  "height": 320,
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "color": "#9BB4BC",
+        "strokeWidth": 3
+      },
+      "encoding": {
+        "y": {
+          "field": "code",
+          "type": "nominal",
+          "sort": "-x",
+          "axis": {
+            "title": null
+          }
+        },
+        "x": {
+          "field": "year2024",
+          "type": "quantitative",
+          "axis": {
+            "title": "New registrations"
+          }
+        },
+        "x2": {
+          "field": "year2025"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 95,
+        "color": "#688397"
+      },
+      "encoding": {
+        "y": {
+          "field": "code",
+          "type": "nominal",
+          "sort": "-x"
+        },
+        "x": {
+          "field": "year2024",
+          "type": "quantitative"
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State / territory"
+          },
+          {
+            "field": "year2024",
+            "type": "quantitative",
+            "title": "2024",
+            "format": ","
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 105,
+        "color": "#147D78"
+      },
+      "encoding": {
+        "y": {
+          "field": "code",
+          "type": "nominal",
+          "sort": "-x"
+        },
+        "x": {
+          "field": "year2025",
+          "type": "quantitative"
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State / territory"
+          },
+          {
+            "field": "year2025",
+            "type": "quantitative",
+            "title": "2025",
+            "format": ","
+          },
+          {
+            "field": "change_pct",
+            "title": "Change (%)"
+          }
+        ]
+      }
+    }
+  ],
+  "usermeta": {
+    "chart_number": 7,
+    "proposed_advanced_idiom": true,
+    "source": "DonateLife, new registrations 2024 and 2025",
+    "note": "See README for original data and derived calculations"
+  }
+}

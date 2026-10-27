@@ -1,0 +1,117 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": null,
+  "config": {
+    "font": "DM Sans",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#596F74",
+      "titleColor": "#405A60",
+      "domainColor": "#D9E4DE",
+      "tickColor": "#D9E4DE",
+      "gridColor": "#EDF1ED",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "legend": {
+      "labelColor": "#456065",
+      "titleColor": "#23414B",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "title": {
+      "color": "#18343D",
+      "fontSize": 15
+    },
+    "range": {
+      "category": [
+        "#197E78",
+        "#C17A4C",
+        "#486B98",
+        "#996B93",
+        "#6D965B",
+        "#B66568",
+        "#519AAD",
+        "#8D8260"
+      ]
+    }
+  },
+  "data": {
+    "url": "data/new_registrations_2020_2025.csv"
+  },
+  "width": "container",
+  "height": 285,
+  "mark": {
+    "type": "rect",
+    "cornerRadius": 3,
+    "stroke": "#ffffff",
+    "strokeWidth": 2
+  },
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "ordinal",
+      "axis": {
+        "title": null,
+        "labelAngle": 0
+      }
+    },
+    "y": {
+      "field": "code",
+      "type": "nominal",
+      "sort": [
+        "NSW",
+        "VIC",
+        "QLD",
+        "SA",
+        "WA",
+        "TAS",
+        "NT",
+        "ACT"
+      ],
+      "axis": {
+        "title": null
+      }
+    },
+    "color": {
+      "field": "new_registrations",
+      "type": "quantitative",
+      "scale": {
+        "range": [
+          "#E4F3EA",
+          "#C6E3D9",
+          "#92CBC3",
+          "#5AA5A9",
+          "#307E91",
+          "#234F6F"
+        ]
+      },
+      "title": "Registrations"
+    },
+    "tooltip": [
+      {
+        "field": "state",
+        "title": "State"
+      },
+      {
+        "field": "year",
+        "title": "Year"
+      },
+      {
+        "field": "new_registrations",
+        "type": "quantitative",
+        "title": "New registrations",
+        "format": ","
+      }
+    ]
+  },
+  "usermeta": {
+    "chart_number": 2,
+    "proposed_advanced_idiom": true,
+    "source": "DonateLife, New registrations by state/territory 2020–2025",
+    "note": "See README for original data and derived calculations",
+    "colour_semantics": "Shared sequential teal-to-navy ramp for quantitative values; legends retain separate units and domains."
+  }
+}

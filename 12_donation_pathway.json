@@ -1,0 +1,153 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "The approximate donation pathway in 2025. Bars start at zero on one axis, making near-equal counts distinguishable. Values describe different stages and should not be read as a strict person-by-person conversion funnel.",
+  "background": null,
+  "config": {
+    "font": "DM Sans",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#596F74",
+      "titleColor": "#405A60",
+      "domainColor": "#D9E4DE",
+      "tickColor": "#D9E4DE",
+      "gridColor": "#EDF1ED",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "legend": {
+      "labelColor": "#456065",
+      "titleColor": "#23414B",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "title": {
+      "color": "#18343D",
+      "fontSize": 15
+    },
+    "range": {
+      "category": [
+        "#197E78",
+        "#C17A4C",
+        "#486B98",
+        "#996B93",
+        "#6D965B",
+        "#B66568",
+        "#519AAD",
+        "#8D8260"
+      ]
+    }
+  },
+  "data": {
+    "url": "data/donation_pathway_2025.csv"
+  },
+  "width": "container",
+  "height": 260,
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "cornerRadiusEnd": 4,
+        "color": "#197E78",
+        "height": 32
+      },
+      "encoding": {
+        "x": {
+          "field": "count",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              1850
+            ],
+            "zero": true,
+            "nice": false
+          },
+          "axis": {
+            "title": "Reported count (approximately for early stages)",
+            "format": ",.0f",
+            "tickCount": 5
+          }
+        },
+        "y": {
+          "field": "stage",
+          "type": "nominal",
+          "sort": [
+            "1 · Potential donors",
+            "2 · Families approached",
+            "3 · Families consented",
+            "4 · Actual deceased donors"
+          ],
+          "axis": {
+            "title": null,
+            "labelLimit": 185,
+            "labelFontSize": 11
+          }
+        },
+        "tooltip": [
+          {
+            "field": "stage",
+            "title": "Stage"
+          },
+          {
+            "field": "count",
+            "type": "quantitative",
+            "title": "Reported count",
+            "format": ","
+          },
+          {
+            "field": "note",
+            "title": "Definition"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 8,
+        "color": "#28414B",
+        "fontWeight": "bold",
+        "fontSize": 12
+      },
+      "encoding": {
+        "x": {
+          "field": "count",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              1850
+            ],
+            "zero": true,
+            "nice": false
+          }
+        },
+        "y": {
+          "field": "stage",
+          "type": "nominal",
+          "sort": [
+            "1 · Potential donors",
+            "2 · Families approached",
+            "3 · Families consented",
+            "4 · Actual deceased donors"
+          ]
+        },
+        "text": {
+          "field": "count",
+          "type": "quantitative",
+          "format": ",.0f"
+        }
+      }
+    }
+  ],
+  "usermeta": {
+    "chart_number": 12,
+    "proposed_advanced_idiom": false,
+    "source": "DonateLife, Summary of 2025 donation/transplantation data factsheet",
+    "note": "Zero-aligned bar chart; approximately 1,670 and 1,500 are explicitly comparable. Stage counts are not necessarily a matched cohort."
+  }
+}
